@@ -1,0 +1,3 @@
+#!/bin/bash
+# Wrapper to run cmus flatpak from host inside the toolbox container
+exec flatpak-spawn --host flatpak run io.github.cmus.cmus "$@"

@@ -1,0 +1,136 @@
+configuration {
+    modes: [ drun, "calc:/var/home/bmo/.local/bin/rofi-calc.sh", "emoji:/var/home/bmo/.local/bin/rofi-emoji.sh", "clipboard:/var/home/bmo/.local/bin/rofi-clipboard.sh" ];
+    font: "JetBrainsMono Nerd Font 12";
+    show-icons: true;
+    icon-theme: "Adwaita";
+    terminal: "alacritty";
+    drun-display-format: "{name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    sidebar-mode: true;
+    display-drun: "󰀻 ";
+    display-calc: " ";
+    display-emoji: " ";
+    display-clipboard: " ";
+    kb-accept-custom: "Control+Return";
+    kb-custom-1: "";
+}
+
+@theme "/dev/null"
+
+* {
+    bg: #24273a;
+    bg-alt: #363a4f;
+    bg-selected: #8aadf4;
+    fg: #cad3f5;
+    fg-alt: #8087a2;
+    fg-selected: #181926;
+
+    background-color: transparent;
+    text-color: @fg;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    width: 32%;
+    background-color: @bg;
+    border: 1px;
+    border-color: @bg-selected;
+    border-radius: 0px;
+}
+
+mainbox {
+    children: [ inputbar, message, listview, mode-switcher ];
+    padding: 12px;
+}
+
+inputbar {
+    background-color: @bg-alt;
+    children: [ prompt, entry ];
+    padding: 10px 14px;
+    border-radius: 0px;
+    margin: 0px 0px 10px 0px;
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @bg-selected;
+    padding: 0px 8px 0px 0px;
+    font: "JetBrainsMono Nerd Font 14";
+}
+
+entry {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+message {
+    background-color: @bg-alt;
+    padding: 8px 12px;
+    border-radius: 0px;
+    margin: 0px 0px 10px 0px;
+    border: 0px;
+}
+
+textbox {
+    text-color: @fg-alt;
+    background-color: transparent;
+}
+
+listview {
+    fixed-height: true;
+    dynamic: true;
+    scrollbar: false;
+    spacing: 4px;
+    padding: 0px;
+    lines: 5;
+}
+
+element {
+    padding: 8px 12px;
+    border-radius: 0px;
+}
+
+element normal active {
+    text-color: @bg-selected;
+}
+
+element selected {
+    background-color: @bg-alt;
+    text-color: @bg-selected;
+    border: 0px 0px 0px 4px;
+    border-color: @bg-selected;
+    border-radius: 0px;
+}
+
+element-icon {
+    size: 24px;
+    padding: 0px 10px 0px 0px;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: inherit;
+}
+
+mode-switcher {
+    spacing: 10px;
+    margin: 10px 0px 0px 0px;
+}
+
+button {
+    padding: 8px;
+    background-color: @bg-alt;
+    text-color: @fg-alt;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+    border-radius: 0px;
+}
+
+button selected {
+    background-color: @bg-selected;
+    text-color: @fg-selected;
+}

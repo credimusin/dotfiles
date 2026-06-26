@@ -1,0 +1,18 @@
+# Starship configuration with single-line format string
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = "$username$hostname$directory$git_branch$git_state${custom.git_diff_stats}$package$golang$rust$nodejs$python$docker_context$container$line_break$character"
+
+# Disable the line break at the start of the prompt
+add_newline = false
+
+# Disable the default git_status module
+[git_status]
+disabled = true
+
+# Custom module to display git diff stats
+[custom.git_diff_stats]
+command = "/var/home/bmo/.local/bin/git-diff-stats.sh"
+when = "git rev-parse --is-inside-work-tree 2>/dev/null"
+style = "red"
+format = "([$output]($style) )"

@@ -1,0 +1,24 @@
+# Kanshi Display Profiles Configuration
+
+# Profile 1: Laptop Screen Only
+profile {
+    output eDP-1 enable
+}
+
+# Profile 2: External Monitor via HDMI (laptop screen disabled)
+profile {
+    output eDP-1 disable
+    output HDMI-A-1 enable
+}
+
+# Profile 3: External Monitor via DP-1 (laptop screen disabled)
+profile {
+    output eDP-1 disable
+    output DP-1 enable
+}
+
+# Profile 4: External Monitor via DP-2 (laptop screen disabled)
+profile {
+    output eDP-1 disable
+    output DP-2 enable
+}

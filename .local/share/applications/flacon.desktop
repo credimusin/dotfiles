@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Flacon
+Type=Application
+Comment=Split audio file by CUE sheet
+Exec=toolbox run flacon
+Icon=flacon
+Categories=AudioVideo;Audio;
+Terminal=false

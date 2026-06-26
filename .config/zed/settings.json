@@ -1,0 +1,67 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "helix_mode": false,
+  "toolbar": {
+    "selections_menu": true,
+    "breadcrumbs": false,
+    "quick_actions": false
+  },
+  "inline_code_actions": true,
+  "collaboration_panel": {
+    "button": false
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "button": false,
+    "dock": "left"
+  },
+  "debugger": {
+    "button": false
+  },
+  "terminal": {
+    "flexible": false,
+    "dock": "bottom",
+    "shell": {
+      "program": "fish"
+    }
+  },
+  "search": {
+    "button": false
+  },
+  "agent": {
+    "default_profile": "ask",
+    "default_model": {
+      "effort": "minimal",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "enable_thinking": true
+    },
+    "sidebar_side": "right",
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "Ayu Light",
+    "dark": "Ayu Dark",
+  },
+}

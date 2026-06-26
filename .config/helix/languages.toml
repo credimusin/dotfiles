@@ -1,0 +1,64 @@
+
+# === Python ===
+[[language]]
+name = "python"
+language-servers = ["pyright", "ruff"]
+formatter = { command = "ruff", args = ["format", "-"] }
+auto-format = true
+
+# === PHP (Laravel) ===
+[[language]]
+name = "php"
+language-servers = ["intelephense"]
+formatter = { command = "php-cs-fixer", args = ["fix", "--allow-risky=yes", "--using-cache=no", "-"] }
+auto-format = true
+
+# === HTML ===
+[[language]]
+name = "html"
+language-servers = ["superhtml"]
+
+# === Rust ===
+[[language]]
+name = "rust"
+language-servers = ["rust-analyzer"]
+auto-format = true
+
+# === Go ===
+[[language]]
+name = "go"
+language-servers = ["gopls"]
+formatter = { command = "goimports" }
+auto-format = true
+
+# === C++ ===
+[[language]]
+name = "cpp"
+language-servers = ["clangd"]
+
+# === JavaScript / TypeScript ===
+[[language]]
+name = "javascript"
+language-servers = ["typescript-language-server"]
+formatter = { command = "prettier", args = ["--stdin-filepath", "file.js"] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+language-servers = ["typescript-language-server"]
+formatter = { command = "prettier", args = ["--stdin-filepath", "file.ts"] }
+auto-format = true
+
+
+# [[languege]]
+# name = "python"
+# languege-server = { command = "pylsp" }
+# formater = { command = "black", args = ["-"] }
+
+# [[languege]]
+# name = "php"
+# languege-server = { command = "intelephense", args = "--stdio" }
+
+# [[language]]
+# name = "html"
+# language-servers = ["superhtml"]

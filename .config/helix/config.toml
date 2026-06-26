@@ -1,0 +1,50 @@
+theme="base16_transparent"
+
+[editor]
+line-number = "relative"
+auto-format = false
+scrolloff = 5
+color-modes = true
+bufferline = "multiple"
+
+[editor.file-picker]
+hidden = false
+
+[editor.auto-save]
+focus-lost = true
+
+[editor.cursor-shape]
+normal = "block"
+insert = "bar"
+select = "underline"
+
+[editor.indent-guides]
+render = true
+character = "╎"
+skip-levels = 1
+
+[editor.statusline]
+left = ["spinner", "file-modification-indicator"]
+center = ["file-name"]
+right = ["diagnostics", "selections", "position", "file-encoding", "version-control", "mode"]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.soft-wrap]
+enable = true
+wrap-indicator = "↪ "
+
+[keys.normal]
+C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+tab = ":buffer-next"
+S-tab = ":buffer-previous"
+
+[keys.select]
+C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]

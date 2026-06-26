@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=C* Music Player
+Type=Application
+Comment=Console music player (floating window)
+Exec=alacritty --class cmus -e flatpak run io.github.cmus.cmus
+Icon=cmus
+Categories=AudioVideo;Audio;Player;
+Terminal=false

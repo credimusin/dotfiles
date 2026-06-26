@@ -1,0 +1,14 @@
+/*
+!/.gitignore
+!/.bashrc
+!/.bash_profile
+!/.gitconfig
+!/.config/
+!/.local/
+!/.local/bin/
+!/.local/share/
+!/Pictures/
+!/install.sh
+!/README.md
+
+screenshot*
