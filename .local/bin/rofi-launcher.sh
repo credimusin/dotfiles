@@ -1,4 +1,6 @@
 #!/bin/bash
+sleep 0.05
+
 
 # Load a random tip/joke/kaomoji from the tips database
 if [ -f "/var/home/bmo/.config/rofi/tips.txt" ]; then

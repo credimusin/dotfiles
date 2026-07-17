@@ -135,8 +135,8 @@ bindgesture pinch:4:inward kill
     bindsym --to-code $mod+d exec $menu
 
     # Applications keybindings
-    bindsym --to-code $mod+b exec chromium-browser
-    bindsym --to-code $mod+Shift+b exec chromium-browser --incognito
+    bindsym --to-code $mod+b exec flatpak run app.zen_browser.zen
+    bindsym --to-code $mod+Shift+b exec flatpak run app.zen_browser.zen --private-window
     bindsym --to-code $mod+e workspace number 4; exec thunar
     bindsym --to-code $mod+o workspace number 5; exec flatpak run md.obsidian.Obsidian
     bindsym --to-code $mod+y exec flatpak run com.github.hluk.copyq toggle

@@ -6,9 +6,8 @@
 !/clip-watch.sh
 !/git-diff-stats.sh
 !/lock-screen.sh
-!/rofi-calc.sh
-!/rofi-clipboard.sh
-!/rofi-emoji.sh
+!/emoji
+!/pass
 !/rofi-launcher.sh
 !/rofi-powermenu.sh
 !/status-system.sh

@@ -1,0 +1,114 @@
+#!/usr/bin/env python3
+import sys
+import unicodedata
+import subprocess
+
+query = " ".join(sys.argv[1:]).strip().lower()
+if not query:
+    subprocess.run(["notify-send", "-t", "2000", "Emoji", "Error: No query provided"])
+    sys.exit(1)
+
+# Map common terms and handle spelling variations (like hearth -> heart)
+EMOJI_MAP = {
+    "heart": "❤️",
+    "hearth": "❤️",
+    "love": "❤️",
+    "fire": "🔥",
+    "lit": "🔥",
+    "smile": "😊",
+    "grin": "😀",
+    "laugh": "😂",
+    "rofl": "🤣",
+    "wink": "😉",
+    "thumbsup": "👍",
+    "like": "👍",
+    "ok": "👌",
+    "clap": "👏",
+    "party": "🎉",
+    "rocket": "🚀",
+    "check": "✅",
+    "cross": "❌",
+    "warning": "⚠️",
+    "star": "⭐",
+    "sweat": "😅",
+    "sob": "😭",
+    "cry": "😢",
+    "thinking": "🤔",
+    "eyes": "👀",
+    "pray": "🙏",
+    "thanks": "🙏",
+    "hundred": "💯",
+    "100": "💯",
+    "cool": "😎",
+    "sunglasses": "😎",
+    "money": "💵",
+    "coffee": "☕",
+    "beer": "🍺",
+    "pizza": "🍕",
+    "cake": "🍰",
+    "gift": "🎁",
+    "balloon": "🎈",
+    "cat": "🐱",
+    "dog": "🐶",
+    "monkey": "🐵",
+    "sun": "☀️",
+    "moon": "🌙",
+    "cloud": "☁️",
+    "rain": "🌧️",
+    "thunder": "⚡",
+    "collision": "💥",
+    "boom": "💥",
+    "sparkles": "✨",
+}
+
+best_char = None
+best_name = None
+
+if query in EMOJI_MAP:
+    best_char = EMOJI_MAP[query]
+    best_name = query
+else:
+    # Search python's unicode database for matching emoji names
+    ranges = [
+        (0x2600, 0x27BF),   # Misc Symbols, Dingbats
+        (0x1F600, 0x1F64F), # Emoticons
+        (0x1F300, 0x1F5FF), # Misc Symbols and Pictographs
+        (0x1F680, 0x1F6FF), # Transport and Map
+        (0x1F900, 0x1F9FF), # Supplemental Symbols and Pictographs
+        (0x1FA00, 0x1FAFF), # Symbols and Pictographs Extended-A
+    ]
+    matches = []
+    for r in ranges:
+        for codepoint in range(r[0], r[1] + 1):
+            try:
+                char = chr(codepoint)
+                name = unicodedata.name(char).lower()
+                if query in name:
+                    score = 0
+                    words = name.split()
+                    if name == query:
+                        score = 100
+                    elif name.startswith(query):
+                        score = 50 - len(name)
+                    else:
+                        score = 0 - len(name)
+                    if query in words:
+                        score += 30
+                    matches.append((score, char, name))
+            except ValueError:
+                continue
+
+    if matches:
+        matches.sort(key=lambda x: x[0], reverse=True)
+        best_char = matches[0][1]
+        best_name = matches[0][2]
+
+if best_char:
+    # Copy to clipboard
+    process = subprocess.Popen(['wl-copy'], stdin=subprocess.PIPE)
+    process.communicate(input=best_char.encode('utf-8'))
+    # Send notification
+    subprocess.run(["notify-send", "-t", "2000", "Emoji", f"Copied: {best_char} ({best_name})"])
+else:
+    subprocess.run(["notify-send", "-t", "2000", "Emoji", f"Error: No emoji found for '{query}'"])
+    sys.exit(1)

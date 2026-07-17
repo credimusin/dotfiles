@@ -1,53 +1,51 @@
-?query → web  |  :cmd → shell  ←  Quick Rofi prefixes
-Ctrl+A → start of line  |  Ctrl+E → end of line in Rofi
-Sway: Ctrl+Super+W → switch windows to tabs
-Sway: Ctrl+Super+E → restore split layout
-Git: git commit --amend → quickly fix last commit
-Shell: cd - → return to previous working directory
-Tmux: Ctrl+Q, C → new window  |  Ctrl+Q, , → rename window
-Shell: sudo !! → repeat last command as root
-Git: git diff --staged → view staged changes
-Shell: Ctrl+R → reverse search command history
-Shell: Alt+. → paste last argument from previous command
-Vim: :x → save and exit (faster than :wq)
-Docker: docker system prune -a → clean all unused containers & images
-Git: git status -s → short and clean repository status
+Ctrl+R → search shell history
+Alt+. → paste last cmd argument
+Ctrl+A / Ctrl+E → line start/end
+Ctrl+W → delete word in terminal
+Ctrl+U → clear line in terminal
+Ctrl+L → clear screen (like clear)
+cd - → return to previous directory
+git diff --staged → view staged diff
+git commit --amend → fix last commit
+git status -s → short git status
+git log --oneline → short history
+sudo !! → run last command as root
+df -h → show free disk space
+free -h → show memory usage
+tldr <cmd> → short manual help
 ¯\_(ツ)_/¯  Whatever...
-(╯°□°）╯︵ ┻━┻  When the code won't compile
-┬─┬ ノ( ゜-゜ノ)  Putting the table back...
-( ͡° ͜ʖ ͡°)  I see what you did there...
-ʕ•ᴥ•ʔ  Hello, just a friendly bear in your terminal
-(づ｡◕‿‿◕｡)づ  Looks like someone needs a hug
-ಠ_ಠ  Are you sure about that command?
-(ง'̀-'́)ง  Let's fight some bugs!
-“If it works, don't touch it!” — Golden rule of engineering
-Programming is explaining to a computer what a weird person wants
-Write code like the person maintaining it is a violent psychopath who knows where you live
-A good programmer looks both ways before crossing a one-way street... and up
-If builders built buildings the way programmers write code, the first woodpecker would destroy civilization
-There are 10 types of people: those who understand binary, and those who don't
-Two hardest problems in CS: cache invalidation, naming things, and off-by-one errors
-Yesterday it worked. Today it doesn't. Consistent!
-Coffee: a device that converts caffeine into code
-It's not a bug, it's an undocumented feature!
-I don't have bugs, only spontaneous new features
-Don't worry if it doesn't work. If everything worked, you'd be out of a job
-A tester walks into a bar. Orders a beer. Orders 0 beers. Orders 999999 beers. Orders a lizard...
-A programmer's keyboard should only have three keys: Ctrl, C, V
-Another git merge conflict... Time to change careers?
-sudo rm -rf / --no-preserve-root  ←  DO NOT RUN THIS!
-Spaces or Tabs? Correct answer: getting fired
-We deploy on Friday at 5:59 PM. Because we love adrenaline
-Senior: writes 10 lines of code. Junior: writes 1000 lines. Neither works
-Code smells... Must be time for refactoring
-Sometimes I think computers are smarter than me. Then I remember who programmed them
-Git: commit -m "fix"  ←  The most honest commit message ever
-Git: commit -m "added stuff"  ←  Another masterpiece of brevity
-While you read this, a production server somewhere is crashing
-Docker: works on my machine! — Then we will deploy your machine to production!
-Theory is when you know everything but nothing works. Practice is when everything works but no one knows why
-Algorithm: word used by programmers when they don't want to explain what they did
-Best code is no code
-(ノ ゜Д゜)ノ ︵ ┻━┻  RAGE! WHO BROKE THE BUILD?!
-¯\(°_o)/¯  I have no idea how it works, but it does
-(っ◕‿◕)っ  Smile, the compilation will succeed!
+(╯°□°）╯︵ ┻━┻  Rage!
+( ͡° ͜ʖ ͡°)  I see you...
+ʕ•ᴥ•ʔ  Just a friendly bear
+(づ｡◕‿‿◕｡)づ  Need a hug?
+ಠ_ಠ  Are you sure?
+(ง'̀-'́)ง  Fight some bugs!
+(｡◕‿◕｡)  Have a wonderful day!
+(^_^)v  Peace and code!
+(•_•) ( •_•)>⌐■-■ (⌐■_■)
+(=^·ｪ·^=)  Cat in your system!
+(o^▽^o)  Happy coding!
+(✿◠‿◠)  Relax and breathe
+🌸 🌿 🦊 🐻 ⛅  Nature mood
+“If it works, don't touch it!”
+Best code is no code at all
+Code compiles? Time to party! 🎉
+Keep it simple, stupid (KISS)
+Don't repeat yourself (DRY)
+Works on my machine! ¯\_(ツ)_/¯
+It's a feature, not a bug!
+Ctrl+C, Ctrl+V → Senior Dev
+No bugs, only surprises 🎁
+deploying on Friday... 💀
+There is no place like 127.0.0.1 🏠
+Eat. Sleep. Code. Repeat.
+Bugs are just spicy features 🌶️
+git push --force  ←  Adrenaline!
+Coffee level: CRITICAL ☕
+God state vs I know nothing state
+Compiling... Go grab a coffee! ☕
+My code is self-documenting (fails)
+In code we trust, bugs we bust 🔫
+It's not slow, it's contemplative
+Did you try restarting it? 🔌
+keyboard clicks are ASMR ⌨️

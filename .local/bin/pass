@@ -1,0 +1,12 @@
+#!/bin/bash
+# Real pass binary
+REAL_PASS="/usr/bin/pass"
+
+if [ "$1" = "copy" ] && [ -n "$2" ]; then
+    # Translate "pass copy <path>" to "pass show -c <path>"
+    shift
+    exec "$REAL_PASS" show -c "$@"
+else
+    # Forward all other calls to real pass
+    exec "$REAL_PASS" "$@"
+fi

@@ -17,6 +17,7 @@ if [ -z "${VPN_HOST:-}" ] || [ -z "${VPN_PIN:-}" ]; then
 fi
 
 # Get VPN password using pass, if pass is initialized and contains the key, otherwise prompt
+export PASSWORD_STORE_DIR="$HOME/.password-store-local"
 if command -v pass &>/dev/null && pass show vpn/qwesta &>/dev/null; then
     VPN_PASS=$(pass show vpn/qwesta | head -n 1)
 else

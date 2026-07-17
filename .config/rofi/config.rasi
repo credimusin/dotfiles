@@ -1,5 +1,5 @@
 configuration {
-    modes: [ drun, "calc:/var/home/bmo/.local/bin/rofi-calc.sh", "emoji:/var/home/bmo/.local/bin/rofi-emoji.sh", "clipboard:/var/home/bmo/.local/bin/rofi-clipboard.sh" ];
+    modes: [ drun, run ];
     font: "JetBrainsMono Nerd Font 12";
     show-icons: true;
     icon-theme: "Adwaita";
@@ -8,11 +8,9 @@ configuration {
     location: 0;
     disable-history: false;
     hide-scrollbar: true;
-    sidebar-mode: true;
-    display-drun: "󰀻 ";
-    display-calc: " ";
-    display-emoji: " ";
-    display-clipboard: " ";
+    sidebar-mode: false;
+    display-drun: " ";
+    display-run: " ";
     kb-accept-custom: "Control+Return";
     kb-custom-1: "";
 }
@@ -37,13 +35,15 @@ configuration {
 window {
     width: 32%;
     background-color: @bg;
+    background-image: url("/var/home/bmo/.config/rofi/botanica_rofi.jpg", both);
     border: 1px;
     border-color: @bg-selected;
     border-radius: 0px;
 }
 
 mainbox {
-    children: [ inputbar, message, listview, mode-switcher ];
+    background-color: #24273ae8;
+    children: [ inputbar, message, listview ];
     padding: 12px;
 }
 
@@ -87,6 +87,7 @@ listview {
     spacing: 4px;
     padding: 0px;
     lines: 5;
+    require-input: true;
 }
 
 element {
