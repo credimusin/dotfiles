@@ -4,7 +4,7 @@
 options="Lock screen\nSuspend\nReboot\nPower off"
 
 # Run Rofi in dmenu mode without icons and without input/search bar
-chosen=$(echo -e "$options" | rofi -dmenu -i -no-show-icons -p "Power" -theme-str 'window { width: 20%; } listview { lines: 4; } inputbar { enabled: false; }' 2>/dev/null)
+chosen=$(echo -e "$options" | rofi -dmenu -i -no-show-icons -p "Power" -theme-str 'window { width: 20%; } listview { lines: 4; require-input: false; } inputbar { enabled: false; }' 2>/dev/null)
 
 case "$chosen" in
     *Lock*)
