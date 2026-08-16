@@ -7,7 +7,7 @@ if [ -z "$capacity" ]; then
 fi
 
 if [ "$status" = "Charging" ] || [ "$status" = "Full" ]; then
-    echo "⚡ $capacity%"
+    echo "󰂄 $capacity%"
 else
-    echo "🔋 $capacity%"
+    echo "󰁹 $capacity%"
 fi

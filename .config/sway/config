@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term footclient
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -165,7 +165,7 @@ bindgesture pinch:4:inward kill
     floating_modifier $mod normal
 
     # Reload the configuration file and restart Kanshi to maintain display layouts
-    bindsym --to-code $mod+Shift+r reload, exec systemctl --user restart kanshi
+    bindsym --to-code $mod+Shift+r reload, exec systemctl --user restart kanshi, exec notify-send "Sway" "Конфигурация и мониторы перезагружены"
 
     # Exit sway (logs you out of your Wayland session)
     # bindsym --to-code $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
