@@ -1,0 +1,59 @@
+inherits = "base16_transparent"
+
+"keyword" = "#c6a0f6" 
+"keyword.control" = "#c6a0f6" 
+"keyword.function" = "#c6a0f6" 
+"keyword.operator" = "#c6a0f6" 
+"keyword.storage" = "#c6a0f6" 
+
+"function" = "#8aadf4" 
+"function.method" = "#8aadf4" 
+"function.call" = "#8aadf4" 
+"function.builtin" = "#ee99a0"
+"function.macro" = "#ee99a0"
+
+"type" = "#eed49f" 
+"type.builtin" = "#eed49f" 
+"type.enum" = "#eed49f"
+
+"variable" = "#cad3f5" 
+"variable.other.member" = "#8bd5ca" 
+"variable.parameter" = { fg = "#f0c6c6", modifiers = ["italic"] } 
+"variable.builtin" = "#ed8796" 
+
+"string" = "#f4dbd6" 
+"string.special" = "#f5bde6" 
+"string.special.path" = "#8bd5ca"
+"string.special.url" = { fg = "#7dc4e4", modifiers = ["underlined"] } 
+"string.regexp" = "#f5a97f" 
+
+"constant.character" = "#f0c6c6" 
+"constant.character.escape" = "#ee99a0" 
+
+"constant" = "#f5a97f" 
+"constant.numeric" = "#f5a97f" 
+"constant.builtin" = "#f5a97f" 
+
+"tag" = "#c6a0f6" 
+"tag.builtin" = "#c6a0f6" 
+"attribute" = "#eed49f" 
+"tag.delimiter" = "#8087a2" 
+
+"markup.heading" = { fg = "#ed8796", modifiers = ["bold"] }
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.link.text" = "#8aadf4"
+"markup.link.url" = { fg = "#7dc4e4", modifiers = ["underlined"] }
+"markup.raw" = "#f5a97f"
+
+"comment" = { fg = "#8087a2", modifiers = ["italic"] } 
+"comment.line" = { fg = "#8087a2", modifiers = ["italic"] }
+"comment.block" = { fg = "#8087a2", modifiers = ["italic"] }
+
+"operator" = "#91d7e3" 
+"punctuation" = "#a5adcb" 
+"punctuation.delimiter" = "#6e738d"
+"punctuation.bracket" = "#939ab7"
+
+"label" = "#7dc4e4"
+"namespace" = "#eed49f"

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+    echo "Usage: timer-notify <seconds> <duration_str> [message]"
+    exit 1
+fi
+
+seconds=$1
+duration_str=$2
+message=${3:-"Time's up!"}
+
+# 1. Notification at start
+id=$(notify-send -p "Timer" "Started for $duration_str" -i alarm-clock)
+
+# Fallback if notify-send doesn't print ID
+if [ -z "$id" ]; then
+    id=9999
+fi
+
+# Determine if we should send a 1-minute warning
+# We send warning only if duration is strictly greater than 60 seconds
+has_warning=$(awk -v s="$seconds" 'BEGIN {print (s > 60) ? 1 : 0}')
+
+if [ "$has_warning" -eq 1 ]; then
+    sleep_before_warning=$(awk -v s="$seconds" 'BEGIN {print s - 60}')
+    sleep "$sleep_before_warning"
+    
+    # 2. Warning notification (replaces the start notification)
+    notify-send -r "$id" "Timer" "1 minute remaining" -i alarm-clock
+    (play -q -n synth 0.08 sin 2000 vol 0.15) &
+    
+    # Sleep the final 60 seconds
+    sleep 60
+else
+    # Sleep the full duration if it's 60 seconds or less
+    sleep "$seconds"
+fi
+
+# 3. Final alarm (replaces the previous notification and sets critical urgency)
+notify-send -r "$id" "Timer: Times out!" "$message" -i alarm-clock -u critical
+(play -q -n synth 0.08 sin 2000 vol 0.12 && play -q -n synth 0.08 sin 2000 vol 0.12 && play -q -n synth 0.08 sin 2000 vol 0.12 && play -q -n synth 0.08 sin 2000 vol 0.12) &
+
+

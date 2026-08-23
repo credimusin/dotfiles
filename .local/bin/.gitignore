@@ -18,3 +18,8 @@
 !/bluetooth-reconnect.sh
 !/audio-switcher.py
 !/launch-on-empty.sh
+!/zls
+!/zig
+!/php
+!/lldb-dap
+!/timer-notify

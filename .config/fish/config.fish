@@ -2,6 +2,10 @@ if status is-interactive
     # Remove default welcome message
     set -g fish_greeting ''
     
+    # Set default editor to Helix (hx)
+    set -gx EDITOR hx
+    set -gx VISUAL hx
+    
     # Disable default mouse binding to let Tmux/terminal handle selections
     set -g fish_mouse_default_binding none
 
@@ -51,8 +55,9 @@ if status is-interactive
     alias py=python
     alias lg="toolbox run lazygit"
     alias gh="toolbox run gh"
-    alias ollama="toolbox run ollama"
+    alias zig="toolbox run zig"
     alias fastfetch="toolbox run fastfetch"
+    alias sysupdate="flatpak update -y; and toolbox run sudo dnf upgrade -y; and rpm-ostree upgrade"
     
     # Modern alternatives
     alias cat=bat
@@ -70,8 +75,9 @@ if status is-interactive
     alias l1='eza -1'
 
     # Utilities
-    alias ipinfo="curl -s ipinfo.io | jq '.city, .ip'"
+    alias ii="curl -s ipinfo.io | jq '.city, .ip'"
     alias speed="cloudflare-speed-cli"
+    alias lpass="PASSWORD_STORE_DIR=~/.password-store-local pass"
 
     # VPN Control
     alias vu="vpn-control.sh up"
@@ -79,8 +85,7 @@ if status is-interactive
     alias vr="vpn-control.sh restart"
 
     # Bluetooth Headphones Control
-    alias hr="bluetooth-reconnect.sh"
-    alias hpr="bluetooth-reconnect.sh"
+    alias bluetuith="bluetuith -w"
 
     # Interactive Fuzzy Search (fzf + bat)
     alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
@@ -97,4 +102,20 @@ if status is-interactive
         source /usr/share/fzf/shell/key-bindings.fish
         fzf_key_bindings
     end
+end
+
+# opencode
+fish_add_path /home/bmo/.opencode/bin
+
+# Java JDK 17
+set -gx JAVA_HOME /home/bmo/.local/jdk-17
+if test -d "$JAVA_HOME"
+    fish_add_path "$JAVA_HOME/bin"
+end
+
+# fnm
+set -gx FNM_PATH /home/bmo/.local/share/fnm
+if test -d "$FNM_PATH"
+    fish_add_path "$FNM_PATH"
+    fnm env --use-on-cd --shell fish | source
 end

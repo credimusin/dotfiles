@@ -1,11 +1,13 @@
-theme="base16_transparent"
+theme = "custom"
 
 [editor]
 line-number = "relative"
 auto-format = false
 scrolloff = 5
 color-modes = true
-bufferline = "multiple"
+bufferline = "never"
+popup-border = "all"
+end-of-line-diagnostics = "disable"
 
 [editor.file-picker]
 hidden = false
@@ -13,27 +15,29 @@ hidden = false
 [editor.auto-save]
 focus-lost = true
 
-[editor.cursor-shape]
-normal = "block"
-insert = "bar"
-select = "underline"
-
 [editor.indent-guides]
 render = true
-character = "╎"
+character = "│"
 skip-levels = 1
 
 [editor.statusline]
-left = ["spinner", "file-modification-indicator"]
+left = ["mode", "selections", "position", "file-modification-indicator"]
 center = ["file-name"]
-right = ["diagnostics", "selections", "position", "file-encoding", "version-control", "mode"]
-mode.normal = "NORMAL"
-mode.insert = "INSERT"
-mode.select = "SELECT"
+right = ["diagnostics", "workspace-diagnostics", "spinner", "file-encoding", "version-control"]
+separator = " │ "
+mode.normal = "NOR"
+mode.insert = "INS"
+mode.select = "SEL"
 
 [editor.lsp]
 display-messages = true
-display-inlay-hints = true
+display-inlay-hints = false
+auto-signature-help = false
+
+[editor.inline-diagnostics]
+cursor-line = "disable"
+other-lines = "disable"
+
 
 [editor.soft-wrap]
 enable = true

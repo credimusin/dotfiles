@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ -f /run/.containerenv ]; then
+  # Inside container: bypass wrapper and run the real binary
+  exec /usr/bin/php "$@"
+else
+  # On host: run php inside the toolbox container
+  exec toolbox run php "$@"
+fi

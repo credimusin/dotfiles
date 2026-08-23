@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ -x /usr/bin/lldb-dap ]; then
+    exec /usr/bin/lldb-dap "$@"
+else
+    exec toolbox run lldb-dap "$@"
+fi

@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ -x /usr/bin/zig ]; then
+    exec /usr/bin/zig "$@"
+else
+    exec toolbox run zig "$@"
+fi
