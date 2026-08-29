@@ -1,57 +1,60 @@
+# Git Blame LSP
+[language-server.git-blame]
+command = "git-blame-lsp"
+
 # Python 
 [[language]]
 name = "python"
-language-servers = ["pyright", "ruff"]
+language-servers = ["pyright", "ruff", "git-blame"]
 formatter = { command = "ruff", args = ["format", "-"] }
 auto-format = true
 
 # PHP (Laravel) 
 [[language]]
 name = "php"
-language-servers = ["intelephense"]
+language-servers = ["intelephense", "git-blame"]
 formatter = { command = "php-cs-fixer", args = ["fix", "--allow-risky=yes", "--using-cache=no", "-"] }
 auto-format = true
 
 # HTML 
 [[language]]
 name = "html"
-language-servers = ["superhtml"]
+language-servers = ["superhtml", "git-blame"]
 
 # Rust 
 [[language]]
 name = "rust"
-language-servers = ["rust-analyzer"]
+language-servers = ["rust-analyzer", "git-blame"]
 auto-format = true
 
 # Go 
 [[language]]
 name = "go"
-language-servers = ["gopls"]
+language-servers = ["gopls", "git-blame"]
 formatter = { command = "goimports" }
 auto-format = true
 
 # C++ 
 [[language]]
 name = "cpp"
-language-servers = ["clangd"]
+language-servers = ["clangd", "git-blame"]
 
 # JavaScript / TypeScript 
 [[language]]
 name = "javascript"
-language-servers = ["typescript-language-server"]
+language-servers = ["typescript-language-server", "git-blame"]
 formatter = { command = "prettier", args = ["--stdin-filepath", "file.js"] }
 auto-format = true
 
 [[language]]
 name = "typescript"
-language-servers = ["typescript-language-server"]
+language-servers = ["typescript-language-server", "git-blame"]
 formatter = { command = "prettier", args = ["--stdin-filepath", "file.ts"] }
 auto-format = true
 
 # Zig 
 [[language]]
 name = "zig"
-language-servers = ["zls"]
+language-servers = ["zls", "git-blame"]
 formatter = { command = "zig", args = ["fmt", "--stdin"] }
 auto-format = true
-

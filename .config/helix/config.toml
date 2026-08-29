@@ -3,6 +3,7 @@ theme = "custom"
 [editor]
 line-number = "relative"
 auto-format = false
+idle-timeout = 60
 scrolloff = 5
 color-modes = true
 bufferline = "never"
