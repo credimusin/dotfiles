@@ -2,7 +2,6 @@
 
 # Animation styles: 'typing', 'spinner', 'rainbow', 'pulse', 'smooth'
 STYLE="smooth"
-INTERVAL=0.1 # Faster interval for smoother animation (if using daemon mode)
 
 # Frame definitions
 case "$STYLE" in
@@ -134,38 +133,7 @@ esac
 
 num_frames=${#frames[@]}
 
-# If run with --daemon, run an infinite loop updating tmux status-left directly
-if [ "$1" = "--daemon" ]; then
-    # Trap SIGTERM so tmux doesn't show an error when the old daemon is killed
-    trap "exit 0" SIGTERM
-
-    # Prevent multiple daemons running (kill old one if exists)
-    LOCKFILE="/tmp/tmux_animate_icon.lock"
-    if [ -f "$LOCKFILE" ]; then
-        old_pid=$(cat "$LOCKFILE" 2>/dev/null)
-        if [ -n "$old_pid" ] && kill -0 "$old_pid" 2>/dev/null; then
-            kill "$old_pid" 2>/dev/null
-            sleep 0.05
-        fi
-    fi
-    echo $$ > "$LOCKFILE"
-
-    i=0
-    # Wait for tmux server to start and make sure we don't spin if server dies
-    while true; do
-        if ! tmux info &>/dev/null; then
-            # If tmux server is not running or we can't connect, exit daemon
-            exit 0
-        fi
-        
-        tmux set-option -g status-left "${frames[i]} "
-        i=$(( (i + 1) % num_frames ))
-        sleep "$INTERVAL"
-    done
-else
-    # One-shot mode (called by tmux via status-interval)
-    # Calculate index based on current epoch time (seconds)
-    sec=$(date +%s)
-    index=$(( sec % num_frames ))
-    echo -e "${frames[index]} "
-fi
+# One-shot mode: calculate frame index based on current epoch seconds
+sec=$(date +%s)
+index=$(( sec % num_frames ))
+echo -e "${frames[index]} "
