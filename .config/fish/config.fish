@@ -76,7 +76,6 @@ if status is-interactive
 
     # Utilities
     alias ii="curl -s ipinfo.io | jq '.city, .ip'"
-    alias speed="cloudflare-speed-cli"
     alias lpass="PASSWORD_STORE_DIR=~/.password-store-local pass"
 
     # VPN Control
