@@ -36,14 +36,6 @@ function speed --description "Independent CLI network speed benchmark"
     set -l frames ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏
     set -l frame_count (count $frames)
 
-    # Banner
-    echo ""
-    echo " "$c_title"󰛳  Network Benchmark"$c_reset" "$c_dim"(Independent / No BigTech)"$c_reset
-    echo " "$c_dim"──────────────────────────────────────────────────"$c_reset
-    echo "  "$c_dim"Targets: Hetzner (Helsinki) • Tele2 (Europe)"$c_reset
-    echo " "$c_dim"──────────────────────────────────────────────────"$c_reset
-    echo ""
-
     # Global tracking variables for cleanup
     set -g __speed_pid ""
     set -g __speed_tmp ""
@@ -62,10 +54,79 @@ function speed --description "Independent CLI network speed benchmark"
         return 130
     end
 
+    printf "\e[?25l" # Hide cursor
+
+    # Initial Banner
+    echo ""
+    echo " $c_title󰛳  Network Benchmark$c_reset $c_dim(Independent / No BigTech)$c_reset"
+    echo " $c_dim─────────────────────────────────────────────────────────$c_reset"
+
+    # --- RESOLVE SOURCE LOCATION ---
+    set -g __speed_tmp (mktemp)
+    curl -4 -s --connect-timeout 2 --max-time 3 ipinfo.io > $__speed_tmp 2>/dev/null &
+    set -g __speed_pid $last_pid
+
+    set -l f_idx 1
+    while kill -0 $__speed_pid 2>/dev/null
+        if test $__speed_interrupted -eq 1
+            break
+        end
+        printf "\r\e[2K  %s%s%s Resolving source location..." $c_yellow $frames[$f_idx] $c_reset
+        set f_idx (math "$f_idx % $frame_count + 1")
+        sleep 0.08
+    end
+    wait $__speed_pid 2>/dev/null
+
+    set -l raw_info (cat $__speed_tmp 2>/dev/null)
+    rm -f $__speed_tmp
+
+    set -l src_str "Unknown"
+    if test -n "$raw_info"
+        set -l city ""
+        set -l country ""
+        set -l org ""
+        set -l ip ""
+
+        if type -q jq
+            set city (echo $raw_info | jq -r ".city // empty" 2>/dev/null)
+            set country (echo $raw_info | jq -r ".country // empty" 2>/dev/null)
+            set org (echo $raw_info | jq -r ".org // empty" 2>/dev/null | string replace -r "^AS[0-9]+ " "")
+            set ip (echo $raw_info | jq -r ".ip // empty" 2>/dev/null)
+        else
+            set city (echo $raw_info | string match -r '"city":\s*"([^"]+)"' | tail -n1)
+            set country (echo $raw_info | string match -r '"country":\s*"([^"]+)"' | tail -n1)
+            set org (echo $raw_info | string match -r '"org":\s*"([^"]+)"' | tail -n1 | string replace -r "^AS[0-9]+ " "")
+            set ip (echo $raw_info | string match -r '"ip":\s*"([^"]+)"' | tail -n1)
+        end
+
+        set -l parts
+        if test -n "$city" -a -n "$country"
+            set -a parts "$city, $country"
+        else if test -n "$country"
+            set -a parts "$country"
+        end
+
+        if test -n "$org"
+            set -a parts "$org"
+        end
+
+        if test (count $parts) -gt 0
+            set src_str (string join " • " $parts)
+            if test -n "$ip"
+                set src_str "$src_str ($ip)"
+            end
+        else if test -n "$ip"
+            set src_str "$ip"
+        end
+    end
+
+    printf "\r\e[2K  %sSource%s : %s\n" $c_cyan $c_reset $src_str
+    echo "  $c_blue"Target"$c_reset : Hetzner (Helsinki, Down) • Tele2 (Europe, Up)"
+    echo " $c_dim─────────────────────────────────────────────────────────$c_reset"
+    echo ""
+
     set -l down_speeds
     set -l up_speeds
-
-    printf "\e[?25l" # Hide cursor
 
     for size_mb in $sizes
         if test $__speed_interrupted -eq 1
@@ -86,7 +147,7 @@ function speed --description "Independent CLI network speed benchmark"
              --connect-timeout 8 --max-time 180 "$dl_url" > $__speed_tmp 2>/dev/null &
         set -g __speed_pid $last_pid
 
-        set -l f_idx 1
+        set f_idx 1
         set -l ticks 0
         while kill -0 $__speed_pid 2>/dev/null
             if test $__speed_interrupted -eq 1
@@ -193,7 +254,7 @@ function speed --description "Independent CLI network speed benchmark"
 
     # --- SUMMARY IF MULTIPLE TESTS ---
     if test (count $sizes) -gt 1
-        echo " "$c_dim"──────────────────────────────────────────────────"$c_reset
+        echo " "$c_dim"─────────────────────────────────────────────────────────"$c_reset
         
         if test (count $down_speeds) -gt 0
             set -l tot_down 0
