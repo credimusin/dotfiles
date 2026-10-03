@@ -14,10 +14,10 @@ fi
 LONDON_HOST="${VPN_HOST_LONDON:-${VPN_HOST:-}}"
 LONDON_PIN="${VPN_PIN_LONDON:-${VPN_PIN:-}}"
 
-HELSINKI_HOST="${VPN_HOST_HELSINKI:-}"
-HELSINKI_PIN="${VPN_PIN_HELSINKI:-}"
-
 DEFAULT_LOC="${DEFAULT_VPN_LOCATION:-auto}"
+
+# Gateway priority order for automatic failover
+GATEWAYS=("london")
 
 # Desktop notifications helper
 send_notification() {
@@ -38,7 +38,7 @@ case "$1" in
         ACTION="$1"
         LOCATION_ARG="$2"
         ;;
-    london|lon|helsinki|hel|auto)
+    london|lon|auto)
         ACTION="up"
         LOCATION_ARG="$1"
         ;;
@@ -48,7 +48,7 @@ case "$1" in
         ;;
     *)
         echo "Error: Unknown command or location '$1'" >&2
-        echo "Usage: $0 {up|down|restart|status} [london|lon|helsinki|hel|auto]" >&2
+        echo "Usage: $0 {up|down|restart|status} [london|lon|auto]" >&2
         exit 1
         ;;
 esac
@@ -76,10 +76,10 @@ set_location() {
             TARGET_PIN="$LONDON_PIN"
             LOCATION_NAME="London"
             ;;
-        helsinki|hel)
-            TARGET_HOST="$HELSINKI_HOST"
-            TARGET_PIN="$HELSINKI_PIN"
-            LOCATION_NAME="Helsinki"
+        *)
+            TARGET_HOST=""
+            TARGET_PIN=""
+            LOCATION_NAME=""
             ;;
     esac
 }
@@ -128,20 +128,16 @@ wait_and_select_gateway() {
         return 1
     fi
 
-    # Auto mode: try primary (London), then secondary (Helsinki)
+    # Auto mode: try gateways in priority order
     echo "Waiting for network and checking VPN gateways (auto failover)..."
     while [ $count -lt $max_retries ]; do
-        if [ -n "$LONDON_HOST" ] && check_server_reachability "$LONDON_HOST"; then
-            set_location "london"
-            echo "Primary VPN gateway (London - $LONDON_HOST) is reachable."
-            return 0
-        fi
-
-        if [ -n "$HELSINKI_HOST" ] && check_server_reachability "$HELSINKI_HOST"; then
-            set_location "helsinki"
-            echo "Fallback VPN gateway (Helsinki - $HELSINKI_HOST) is reachable."
-            return 0
-        fi
+        for loc in "${GATEWAYS[@]}"; do
+            set_location "$loc"
+            if [ -n "$TARGET_HOST" ] && check_server_reachability "$TARGET_HOST"; then
+                echo "VPN gateway ($LOCATION_NAME - $TARGET_HOST) is reachable."
+                return 0
+            fi
+        done
 
         sleep 1
         count=$((count + 1))
@@ -197,7 +193,7 @@ case "$ACTION" in
             send_notification "normal" "VPN Connected" "Connected to $LOCATION_NAME ($TARGET_HOST)"
         else
             echo "Cannot start VPN: gateways are unreachable." >&2
-            send_notification "critical" "VPN Connection Failed" "Neither London nor Helsinki VPN server is reachable. Continuing without VPN."
+            send_notification "critical" "VPN Connection Failed" "No VPN gateway is reachable. Continuing without VPN."
             exit 0
         fi
         ;;
@@ -219,7 +215,7 @@ case "$ACTION" in
             send_notification "normal" "VPN Connected" "Connected to $LOCATION_NAME ($TARGET_HOST)"
         else
             echo "Cannot start VPN: gateways are unreachable." >&2
-            send_notification "critical" "VPN Connection Failed" "Neither London nor Helsinki VPN server is reachable. Continuing without VPN."
+            send_notification "critical" "VPN Connection Failed" "No VPN gateway is reachable. Continuing without VPN."
             exit 0
         fi
         ;;

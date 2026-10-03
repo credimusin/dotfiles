@@ -25,11 +25,17 @@ if status is-interactive
     set -g fish_color_end f5a97f
     set -g fish_color_error ed8796
     set -g fish_color_gray 6e738d
+    set -g fish_color_comment 6e738d
     set -g fish_color_selection --background=36394f
     set -g fish_color_search_match --background=36394f
     set -g fish_color_operator 8bd5ca
     set -g fish_color_escape f4dbd6
     set -g fish_color_autosuggestion 6e738d
+
+    # Ensure correct TERM inside tmux (prevent fallback to screen terminfo)
+    if test "$TERM" = "screen" -a -n "$TMUX"
+        set -gx TERM tmux-256color
+    end
 
     # --- Autostart Tmux ---
     # Only start Tmux automatically if we are NOT already in a Tmux session,
@@ -55,6 +61,7 @@ if status is-interactive
     alias py=python
     alias lg="toolbox run lazygit"
     alias gh="toolbox run gh"
+    alias oc="opencode"
     alias zig="toolbox run zig"
     alias fastfetch="toolbox run fastfetch"
     alias sysupdate="flatpak update -y; and toolbox run sudo dnf upgrade -y; and rpm-ostree upgrade"
@@ -100,6 +107,10 @@ if status is-interactive
     if test -f /usr/share/fzf/shell/key-bindings.fish
         source /usr/share/fzf/shell/key-bindings.fish
         fzf_key_bindings
+    end
+
+    if type -q atuin
+        atuin init fish | source
     end
 end
 
